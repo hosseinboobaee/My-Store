@@ -49,6 +49,7 @@ namespace Application.Services
             }
             return false;
         }
+
         [HttpDelete("{productId}")]
         public async Task<bool> DeleteProduct(int productId)
         {
