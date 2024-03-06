@@ -89,6 +89,7 @@ namespace Application.Services
             }
             return null;
         }
+
         [HttpPut]
         public async Task<bool> UpdateProduct(Product productDetails)
         {
