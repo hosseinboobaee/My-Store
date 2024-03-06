@@ -72,8 +72,8 @@ namespace Application.Services
         public async Task<IEnumerable<ProductViewModel>> GetAllProducts()
         {
             var res = await _unitOfWork.Products.GetAll();
-            var a = _mapper.Map<List<ProductViewModel>>(res);
-            return a;
+            return _mapper.Map<List<ProductViewModel>>(res);
+          
         }
 
         public async Task<Product> GetProductById(int productId)
