@@ -34,6 +34,7 @@ namespace Application.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
         public async Task<bool> CreateProduct(Product productDetails)
         {
             if (productDetails != null)
