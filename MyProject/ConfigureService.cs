@@ -1,4 +1,5 @@
-﻿using Application.Interface;
+﻿using Application.Helpers;
+using Application.Interface;
 using Application.Services;
 using Infrastructure.Context;
 using Infrastructure.Impelement;
@@ -19,6 +20,10 @@ namespace MyProject
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IProductService, ProductService>();
+
+            #region AutoMapper
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+            #endregion
             return builder.Services;
         }
     }

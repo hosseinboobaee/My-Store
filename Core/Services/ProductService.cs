@@ -1,9 +1,12 @@
 ﻿using Application.Interface;
+using Application.ViewModel;
+using AutoMapper;
 using Domain.Entity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +16,7 @@ namespace Application.Services
     {
         Task<bool> CreateProduct(Product productDetails);
 
-        Task<IEnumerable<Product>> GetAllProducts();
+        Task<IEnumerable<ProductViewModel>> GetAllProducts();
 
         Task<Product> GetProductById(int productId);
 
@@ -24,11 +27,12 @@ namespace Application.Services
     public class ProductService : IProductService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-
-        public ProductService(IUnitOfWork unitOfWork)
+        public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         public async Task<bool> CreateProduct(Product productDetails)
         {
@@ -65,12 +69,14 @@ namespace Application.Services
             return false;
         }
 
-        public async Task<IEnumerable<Product>> GetAllProducts()
+        public async Task<IEnumerable<ProductViewModel>> GetAllProducts()
         {
-            return await _unitOfWork.Products.GetAll();
+            var res = await _unitOfWork.Products.GetAll();
+            var a = _mapper.Map<List<ProductViewModel>>(res);
+            return a;
         }
 
-        public async  Task<Product> GetProductById(int productId)
+        public async Task<Product> GetProductById(int productId)
         {
             if (productId > 0)
             {
