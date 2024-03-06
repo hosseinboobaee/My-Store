@@ -73,7 +73,6 @@ namespace Application.Services
         {
             var res = await _unitOfWork.Products.GetAll();
             return _mapper.Map<List<ProductViewModel>>(res);
-          
         }
 
         public async Task<Product> GetProductById(int productId)
